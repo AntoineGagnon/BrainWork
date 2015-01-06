@@ -1,0 +1,60 @@
+﻿<Window x:Class="BrainWork.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BrainWork" Height="550.8" Width="803.5" Name="MainWindows1" >
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.ColumnSpan="4" Margin="5" Name="gridCases" ShowGridLines="True">
+            <Grid.Background>
+                <ImageBrush ImageSource="/BrainWork;component/papyrus.jpeg"/>
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Name="Case1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="1" Name="Case2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="2" Name="Case3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="3" Name="Case4" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="4" Name="Case5" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="5" Name="Case6" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="6" Name="Case7" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="7" Name="Case8" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="8" Name="Case9" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="9" Name="Case10" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="10" Name="Case11" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+
+
+        </Grid>
+
+        <TextBox Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="0" Margin="5" AcceptsReturn="True" Name="TbIn" TextWrapping="Wrap" FontSize="20" />
+        <TextBox Grid.ColumnSpan="4" Grid.Row="2" Grid.Column="0" Margin="5" AcceptsReturn="True" IsReadOnly="True" Name="TbOut" FontSize="20" />
+        <Button Grid.ColumnSpan="1" Grid.Row="3" Grid.Column="2" Content="Start" Margin="5" Name="BtnStart" Click="BtnStart_Click"/>
+        <Button Grid.ColumnSpan="1" Grid.Row="3" Grid.Column="3" Content="Clear" Margin="5" Name="BtnClear" Click="BtnClear_Click"/>
+        <Slider Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center"  Margin="10" Grid.Row="3" Name="sliderDelay" Maximum="1000" Minimum="0" IsSnapToTickEnabled="True" TickFrequency="50" Value="500" />
+        <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Top" Content="{Binding ElementName=sliderDelay, Path=Value}" />
+
+    </Grid>
+</Window>
