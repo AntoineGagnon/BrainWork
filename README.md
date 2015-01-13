@@ -12,10 +12,14 @@ This tool is using the BrainFuck language, you can find how to write it [here]
 
 Our tool is using numbers and converting them to their ASCII counterpart, if the number is under 33, the program will display the number and not the ASCII character since those are whitespaces and other invisible characters.
 
-To get started, you can either start right away with BrainFuck code, you just have to make your input start with the ":" or you can add value to the scroll by placing them before the ":" and by separating them with whitespaces.
+To get started, you can either start right away with BrainFuck code or you can add value to the scroll by placing them separated by whitespaces and followed by a ":" to start writing the algorithm code
 
 Press start, change the delay between each step on the slide bar and your program should be ready to work.
+    
+A small example that multiply the value 1 by the value 2 :
 
+
+    1 2: <[>[->+>+<<]>>[-<<+>>]<<<]>>. 
 
 If you have any question feel free to ask me.
 [here]:http://www.muppetlabs.com/~breadbox/bf/
