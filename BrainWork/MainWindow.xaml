@@ -16,7 +16,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.ColumnSpan="4" Margin="5" Name="gridCases" ShowGridLines="True">
+        <Grid Grid.ColumnSpan="4" Margin="5" Name="gridCells" ShowGridLines="True">
             <Grid.Background>
                 <ImageBrush ImageSource="/BrainWork;component/papyrus.jpeg"/>
             </Grid.Background>
@@ -34,17 +34,17 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Name="Case1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="1" Name="Case2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="2" Name="Case3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="3" Name="Case4" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="4" Name="Case5" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="5" Name="Case6" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="6" Name="Case7" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="7" Name="Case8" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="8" Name="Case9" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="9" Name="Case10" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
-            <Label Grid.Column="10" Name="Case11" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="0" Name="Cell1" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="1" Name="Cell2" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="2" Name="Cell3" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="3" Name="Cell4" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="4" Name="Cell5" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="5" Name="Cell6" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="6" Name="Cell7" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="7" Name="Cell8" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="8" Name="Cell9" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="9" Name="Cell10" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
+            <Label Grid.Column="10" Name="Cell11" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
 
 
 

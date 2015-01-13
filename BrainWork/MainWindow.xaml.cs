@@ -14,15 +14,15 @@ namespace BrainWork
     public partial class MainWindow : Window
     {
         //scroll
-        char[] liste = new char[100000];
+        char[] scroll = new char[100000];
         //head position, loop counter, actual char
-        int pointeurBande = 50000, loop, pointeurCaractere = 0;
+        int pointerScroll = 50000, loop, pointerChar = 0;
         // is the Run() function stopped
         bool isStopped = true;
         // char used in the brainfuck langage + ':'
-        List<char> listeChar = new List<char>() { '+', '-', '>', '<', '[', ']', '.', ',', ':' };
+        List<char> operatorChar = new List<char>() { '+', '-', '>', '<', '[', ']', '.', ',', ':' };
         //Store the Cell (Label) used to display value
-        List<Label> listeCases = new List<Label>();
+        List<Label> listCells = new List<Label>();
 
         /// <summary>
         /// Add the Cell to the list listeCases
@@ -31,17 +31,14 @@ namespace BrainWork
         {
             InitializeComponent();
 
-            listeCases.Add(Case1);
-            listeCases.Add(Case2);
-            listeCases.Add(Case3);
-            listeCases.Add(Case4);
-            listeCases.Add(Case5);
-            listeCases.Add(Case6);
-            listeCases.Add(Case7);
-            listeCases.Add(Case8);
-            listeCases.Add(Case9);
-            listeCases.Add(Case10);
-            listeCases.Add(Case11);
+            foreach (var item in gridCells.Children)
+	        {
+                if(item.GetType() == Cell1.GetType()){
+                    listCells.Add((Label) item);
+                }
+		 
+	        }
+
         }
 
         /// <summary>
@@ -51,10 +48,10 @@ namespace BrainWork
         /// <param name="e"></param>
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
-            if (isStopped)
+            if (isStopped && TbIn.Text != "")
             {
                 isStopped = false;
-                pointeurCaractere = 0;
+                pointerChar = 0;
                 run(TbIn.Text);
                 BtnClear.IsEnabled = false;
                 BtnStart.Content = "Stop";
@@ -75,40 +72,40 @@ namespace BrainWork
             bool isReadingValues = true;
             int value = 0;
 
-            while (pointeurCaractere < input.Length && !isStopped)
+            while (pointerChar < input.Length && !isStopped)
             {
-                if (listeChar.Contains(input[pointeurCaractere]))
+                if (operatorChar.Contains(input[pointerChar]))
                 {
                     await Task.Delay((int)sliderDelay.Value + 1); //Timer non bloquant
                     isReadingValues = false;
                 }
 
-                switch (input[pointeurCaractere])
+                switch (input[pointerChar])
                 {
                     case '+':
-                        liste[pointeurBande]++;
+                        scroll[pointerScroll]++;
                         break;
                     case '-':
-                        if (liste[pointeurBande] == 0)
-                            liste[pointeurBande] = (char)255;
+                        if (scroll[pointerScroll] == 0)
+                            scroll[pointerScroll] = (char)255;
                         else
-                            liste[pointeurBande]--;
+                            scroll[pointerScroll]--;
                         break;
                     case '>':
-                        pointeurBande++;
+                        pointerScroll++;
                         break;
                     case '<':
-                        pointeurBande--;
+                        pointerScroll--;
                         break;
                     case '[':
-                        if (liste[pointeurBande] == 0)
+                        if (scroll[pointerScroll] == 0)
                         {
                             loop = 1;
                             while (loop > 0)
                             {
-                                pointeurCaractere++;
-                                if (input[pointeurCaractere] == '[') loop++;
-                                if (input[pointeurCaractere] == ']') loop--;
+                                pointerChar++;
+                                if (input[pointerChar] == '[') loop++;
+                                if (input[pointerChar] == ']') loop--;
                             }
                         }
                         break;
@@ -116,37 +113,37 @@ namespace BrainWork
                         loop = 1;
                         while (loop > 0)
                         {
-                            pointeurCaractere--;
-                            if (input[pointeurCaractere] == '[') loop--;
-                            if (input[pointeurCaractere] == ']') loop++;
+                            pointerChar--;
+                            if (input[pointerChar] == '[') loop--;
+                            if (input[pointerChar] == ']') loop++;
                         }
-                        pointeurCaractere--;
+                        pointerChar--;
                         break;
                     case '.':
-                        TbOut.Text += liste[pointeurBande];
+                        TbOut.Text += scroll[pointerScroll];
                         TbOut.UpdateLayout();
                         break;
                     case ',':
                         FenetreInput fi = new FenetreInput();
-                        fi.Closing += (o, e) => { liste[pointeurBande] = fi.input[0]; };
+                        fi.Closing += (o, e) => { scroll[pointerScroll] = fi.input[0]; };
                         fi.ShowDialog();
                         break;
                     case ':':
-                        liste[pointeurBande] = (char)value;
+                        scroll[pointerScroll] = (char)value;
                         isReadingValues = false;
                         break;
                     default:
                         if (isReadingValues)
                         {
-                            if (Char.IsNumber(input[pointeurCaractere]))
+                            if (Char.IsNumber(input[pointerChar]))
                             {
-                                value = value * 10 + (int)Char.GetNumericValue(input[pointeurCaractere]);
+                                value = value * 10 + (int)Char.GetNumericValue(input[pointerChar]);
                             }
-                            if (Char.IsWhiteSpace(input[pointeurCaractere]))
+                            if (Char.IsWhiteSpace(input[pointerChar]))
                             {
-                                liste[pointeurBande] = (char)value;
-                                if (input[pointeurCaractere + 1] != ':')
-                                    pointeurBande++;
+                                scroll[pointerScroll] = (char)value;
+                                if (input[pointerChar + 1] != ':')
+                                    pointerScroll++;
                                 value = 0;
                             }
                         }
@@ -154,8 +151,8 @@ namespace BrainWork
 
                 }
 
-                pointeurCaractere++;
-                actualiserBande();
+                pointerChar++;
+                refreshScroll();
 
             }
             BtnClear.IsEnabled = true;
@@ -165,31 +162,31 @@ namespace BrainWork
 
 
 
-        public void actualiserBande()
+        public void refreshScroll()
         {
             int i = -5;
-            foreach (Label item in listeCases)
+            foreach (Label item in listCells)
             {
-                if (liste[pointeurBande - i] < 33 && liste[pointeurBande - i] > 0)
-                    item.Content = (int)liste[pointeurBande - i];
+                if (scroll[pointerScroll - i] < 33 && scroll[pointerScroll - i] > 0)
+                    item.Content = (int)scroll[pointerScroll - i];
                 else
-                    item.Content = liste[pointeurBande - i];
+                    item.Content = scroll[pointerScroll - i];
                 i++;
             }
         }
 
         /// <summary>
-        /// 
+        /// Will clear the output and reset the scroll to its initial state.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            liste = new char[100000];
-            pointeurBande = 50000;
-            pointeurCaractere = 0;
+            scroll = new char[100000];
+            pointerScroll = 50000;
+            pointerChar = 0;
             TbOut.Clear();
-            actualiserBande();
+            refreshScroll();
 
         }
     }
