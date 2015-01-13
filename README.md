@@ -6,6 +6,10 @@ BrainWork was a student project created by Antoine Gagnon, Cyril Nouvet and Dami
 
 Our aim was to create a tool that could represent how would a Turing machine work. This tool would later help us teach younger student about algorithm and how the Turing machine was the concept that brought the idea of computers to the world.
 
+### Download it 
+
+To download it you can either use the "Download as zip" option if you want the whole source code or you can check our public releases here : https://github.com/AntoineGagnon/BrainWork/releases
+
 ### User manual
 
 This tool is using the BrainFuck language, you can find how to write it [here]
