@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Collections.Generic;
 
 namespace BrainWork
 {
@@ -12,28 +13,57 @@ namespace BrainWork
     /// </summary>
     public partial class MainWindow : Window
     {
+        //scroll
         char[] liste = new char[100000];
+        //head position, loop counter, actual char
         int pointeurBande = 50000, loop, pointeurCaractere = 0;
+        // is the Run() function stopped
+        bool isStopped = true;
+        // char used in the brainfuck langage + ':'
+        List<char> listeChar = new List<char>() { '+', '-', '>', '<', '[', ']', '.', ',', ':' };
+        //Store the Cell (Label) used to display value
+        List<Label> listeCases = new List<Label>();
 
         /// <summary>
-        /// 
+        /// Add the Cell to the list listeCases
         /// </summary>
         public MainWindow()
         {
-            
             InitializeComponent();
+
+            listeCases.Add(Case1);
+            listeCases.Add(Case2);
+            listeCases.Add(Case3);
+            listeCases.Add(Case4);
+            listeCases.Add(Case5);
+            listeCases.Add(Case6);
+            listeCases.Add(Case7);
+            listeCases.Add(Case8);
+            listeCases.Add(Case9);
+            listeCases.Add(Case10);
+            listeCases.Add(Case11);
         }
 
         /// <summary>
-        ///  Initialise le tableau représentant la bande, place le pointeur en son centre et lance l'interpretation du code.
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BtnStart_Click(object sender, RoutedEventArgs e)
         {
-            
-            run(TbIn.Text);
-            BtnClear.IsEnabled = false;
+            if (isStopped)
+            {
+                isStopped = false;
+                pointeurCaractere = 0;
+                run(TbIn.Text);
+                BtnClear.IsEnabled = false;
+                BtnStart.Content = "Stop";
+                
+            }
+            else {
+                BtnStart.Content = "Start";
+                isStopped = true;
+            }
         }
 
         /// <summary>
@@ -44,15 +74,18 @@ namespace BrainWork
         {
             bool isReadingValues = true;
             int value = 0;
-            
-            while (pointeurCaractere < input.Length)
+
+            while (pointeurCaractere < input.Length && !isStopped)
             {
-                await Task.Delay((int) sliderDelay.Value);
+                if (listeChar.Contains(input[pointeurCaractere]))
+                {
+                    await Task.Delay((int)sliderDelay.Value + 1); //Timer non bloquant
+                    isReadingValues = false;
+                }
+
                 switch (input[pointeurCaractere])
                 {
                     case '+':
-                        //if (liste[pointeurBande] == 0)
-                        //    liste[pointeurBande] = (char)32;
                         liste[pointeurBande]++;
                         break;
                     case '-':
@@ -100,25 +133,25 @@ namespace BrainWork
                         break;
                     case ':':
                         liste[pointeurBande] = (char)value;
-                        isReadingValues = false ;
+                        isReadingValues = false;
                         break;
                     default:
                         if (isReadingValues)
                         {
                             if (Char.IsNumber(input[pointeurCaractere]))
                             {
-                                value = value * 10 + (int) Char.GetNumericValue(input[pointeurCaractere]);
+                                value = value * 10 + (int)Char.GetNumericValue(input[pointeurCaractere]);
                             }
                             if (Char.IsWhiteSpace(input[pointeurCaractere]))
                             {
-                                liste[pointeurBande] =(char) value;
-                                if(input[pointeurCaractere + 1] != ':')
+                                liste[pointeurBande] = (char)value;
+                                if (input[pointeurCaractere + 1] != ':')
                                     pointeurBande++;
                                 value = 0;
                             }
                         }
                         break;
-                        
+
                 }
 
                 pointeurCaractere++;
@@ -126,97 +159,23 @@ namespace BrainWork
 
             }
             BtnClear.IsEnabled = true;
+            isStopped = true;
+            BtnStart.Content = "Start";
         }
 
 
 
         public void actualiserBande()
         {
-            if (liste[pointeurBande - 5] < 33 && liste[pointeurBande -5] > 0)
-                Case1.Content = (int)liste[pointeurBande - 5];
-            else
-                Case1.Content = liste[pointeurBande - 5];
-
-            if (liste[pointeurBande - 4] < 33 && liste[pointeurBande - 4] > 0)
-                Case2.Content = (int)liste[pointeurBande - 4];
-            else
-                Case2.Content = liste[pointeurBande - 4];
-
-            if (liste[pointeurBande - 3] < 33 && liste[pointeurBande - 3] > 0)
-                Case3.Content = (int)liste[pointeurBande - 3];
-            else
-                Case3.Content = liste[pointeurBande - 3];
-
-            if (liste[pointeurBande - 2 ] < 33 && liste[pointeurBande - 2 ] > 0)
-                Case4.Content = (int)liste[pointeurBande - 2 ];
-            else
-                Case4.Content = liste[pointeurBande - 2 ];
-
-            if (liste[pointeurBande - 1] < 33 && liste[pointeurBande - 1] > 0)
-                Case5.Content = (int)liste[pointeurBande - 1];
-            else
-                Case5.Content = liste[pointeurBande - 1];
-
-
-            if (liste[pointeurBande] < 33 && liste[pointeurBande] > 0)
-                Case6.Content = (int)liste[pointeurBande];
-            else
-                Case6.Content = liste[pointeurBande];
-
-
-            if (liste[pointeurBande + 1] < 33 && liste[pointeurBande + 1] > 0)
-                Case7.Content = (int)liste[pointeurBande + 1];
-            else
-                Case7.Content = liste[pointeurBande + 1];
-
-            if (liste[pointeurBande +2] < 33 && liste[pointeurBande +2] > 0)
-                Case8.Content = (int)liste[pointeurBande +2];
-            else
-                Case8.Content = liste[pointeurBande +2];
-
-            if (liste[pointeurBande + 3] < 33 && liste[pointeurBande + 3] > 0)
-                Case9.Content = (int)liste[pointeurBande + 3];
-            else
-                Case9.Content = liste[pointeurBande + 3];
-
-            if (liste[pointeurBande + 4] < 33 && liste[pointeurBande + 4] > 0)
-                Case10.Content = (int)liste[pointeurBande + 4];
-            else
-                Case10.Content = liste[pointeurBande + 4];
-
-            if (liste[pointeurBande + 5] < 33 && liste[pointeurBande + 5] > 0)
-                Case11.Content = (int)liste[pointeurBande + 5];
-            else
-                Case11.Content = liste[pointeurBande + 5];
-
-            
-
-
-        }
-
-        public void nettoyerBande()
-        {
-            Case1.Content = 0;
-            Case2.Content = 0;
-            Case3.Content = 0;
-            Case4.Content = 0;
-            Case5.Content = 0;
-            Case6.Content = 0;
-            Case7.Content = 0;
-            Case8.Content = 0;
-            Case9.Content = 0;
-            Case10.Content = 0;
-            Case11.Content = 0;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void TbInput_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            throw new NotImplementedException();
+            int i = -5;
+            foreach (Label item in listeCases)
+            {
+                if (liste[pointeurBande - i] < 33 && liste[pointeurBande - i] > 0)
+                    item.Content = (int)liste[pointeurBande - i];
+                else
+                    item.Content = liste[pointeurBande - i];
+                i++;
+            }
         }
 
         /// <summary>
@@ -226,12 +185,11 @@ namespace BrainWork
         /// <param name="e"></param>
         private void BtnClear_Click(object sender, RoutedEventArgs e)
         {
-            //TbIn.Clear();
-            TbOut.Clear();
             liste = new char[100000];
-            actualiserBande();
             pointeurBande = 50000;
             pointeurCaractere = 0;
+            TbOut.Clear();
+            actualiserBande();
 
         }
     }

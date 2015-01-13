@@ -47,6 +47,7 @@
             <Label Grid.Column="10" Name="Case11" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" FontSize="40" />
 
 
+
         </Grid>
 
         <TextBox Grid.ColumnSpan="4" Grid.Row="1" Grid.Column="0" Margin="5" AcceptsReturn="True" Name="TbIn" TextWrapping="Wrap" FontSize="20" />
@@ -55,6 +56,6 @@
         <Button Grid.ColumnSpan="1" Grid.Row="3" Grid.Column="3" Content="Clear" Margin="5" Name="BtnClear" Click="BtnClear_Click"/>
         <Slider Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center"  Margin="10" Grid.Row="3" Name="sliderDelay" Maximum="1000" Minimum="0" IsSnapToTickEnabled="True" TickFrequency="50" Value="500" />
         <Label Grid.Column="0" Grid.Row="3" VerticalAlignment="Top" Content="{Binding ElementName=sliderDelay, Path=Value}" />
-
+        
     </Grid>
 </Window>
