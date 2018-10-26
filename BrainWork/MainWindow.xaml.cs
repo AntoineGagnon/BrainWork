@@ -133,7 +133,7 @@ namespace BrainWork
                         {
                             if (Char.IsNumber(input[pointerChar]))
                             {
-                                value = value * 10 + (int)Char.GetNumericValue(input[pointerChar]);
+                                value = (value * 10) + (int)Char.GetNumericValue(input[pointerChar]);
                             }
                             if (Char.IsWhiteSpace(input[pointerChar]))
                             {
