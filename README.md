@@ -1,5 +1,5 @@
 # BrainWork
-
+[![CodeFactor](https://www.codefactor.io/repository/github/antoinegagnon/brainwork/badge/master)](https://www.codefactor.io/repository/github/antoinegagnon/brainwork/overview/master)
 ===
 
 BrainWork was a student project created by Antoine Gagnon, Cyril Nouvet and Damien Sourdon during a math project.
