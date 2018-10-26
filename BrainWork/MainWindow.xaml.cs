@@ -36,9 +36,7 @@ namespace BrainWork
                 if(item.GetType() == Cell1.GetType()){
                     listCells.Add((Label) item);
                 }
-		 
 	        }
-
         }
 
         /// <summary>
@@ -55,7 +53,6 @@ namespace BrainWork
                 run(TbIn.Text);
                 BtnClear.IsEnabled = false;
                 BtnStart.Content = "Stop";
-                
             }
             else {
                 BtnStart.Content = "Start";
@@ -79,7 +76,6 @@ namespace BrainWork
                     await Task.Delay((int)sliderDelay.Value + 1); //Timer non bloquant
                     isReadingValues = false;
                 }
-
                 switch (input[pointerChar])
                 {
                     case '+':
@@ -148,19 +144,14 @@ namespace BrainWork
                             }
                         }
                         break;
-
                 }
-
                 pointerChar++;
                 refreshScroll();
-
             }
             BtnClear.IsEnabled = true;
             isStopped = true;
             BtnStart.Content = "Start";
         }
-
-
 
         public void refreshScroll()
         {
@@ -187,7 +178,6 @@ namespace BrainWork
             pointerChar = 0;
             TbOut.Clear();
             refreshScroll();
-
         }
     }
 }
